@@ -1,0 +1,25 @@
+#!/bin/bash
+
+VAL=(7 1 33 44 1 9 19 1 32 46)
+var=1
+
+echo "Starting compiling..."
+make TestIce
+echo "Compile successful"
+echo
+
+for P in ${VAL[@]}
+do
+	OUT=$(build/TestIce testcases/ice/ice${var})
+	AAA="Min ice required: ${P}"
+	if [ "$AAA" = "$OUT" ]
+	then
+		echo "Test ${var} passed!"
+		var=$((var + 1))
+	else
+		echo "Test ${var} failed..."
+		echo "The actual value is ${OUT}"
+		echo "It should be ${AAA}"
+		var=$((var + 1))
+	fi
+done

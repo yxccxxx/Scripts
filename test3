@@ -1,0 +1,23 @@
+#!/bin/bash
+
+VAL=(3 4 2 5 10 3 1109 77 128430 7400)
+var=1
+
+echo "Starting compiling..."
+make TestBuildings
+echo "Compile successful"
+echo
+
+for P in ${VAL[@]}
+do
+	OUT=$(build/TestBuildings testcases/buildings/buildings${var})
+	AAA="Total buildings: ${P}"
+	if [ "$AAA" = "$OUT" ]
+	then
+		echo "Test ${var} passed!"
+		var=$((var + 1))
+	else
+		echo "Test ${var} failed..."
+		var=$((var + 1))
+	fi
+done

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+VAL=(226 226 1004 1012 69420 70418 7234 14764 420420 1000418)
+var=1
+
+echo "Starting compiling..."
+make TestSerial
+echo "Compile successful"
+echo
+
+for P in ${VAL[@]}
+do
+	OUT=$(build/TestSerial testcases/serial/serial${var})
+	AAA="Repeated serial number: ${P}"
+	if [ "$AAA" = "$OUT" ]
+	then
+		echo "Test ${var} passed!"
+		var=$((var + 1))
+	else
+		echo "Test ${var} failed..."
+		echo "The returned value is ${OUT}"
+		var=$((var + 1))
+	fi
+done

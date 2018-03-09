@@ -1,0 +1,24 @@
+#!/bin/bash
+
+VAL=(2 2 3 6 19 29 66 68 5225 5206)
+var=1
+
+echo "Starting compiling..."
+make TestTennis
+echo "Compile successful"
+echo
+
+for P in ${VAL[@]}
+do
+	OUT=$(build/TestTennis testcases/tennis/tennis${var})
+	AAA="Min courts required: ${P}"
+	if [ "$AAA" = "$OUT" ]
+	then
+		echo "Test ${var} passed!"
+		var=$((var + 1))
+	else
+		echo "Test ${var} failed..."
+		echo "The returned value is ${OUT}"
+		var=$((var + 1))
+	fi
+done
